@@ -3,7 +3,7 @@ class FileUploadsController < ApplicationController
   before_action :set_file_upload, only: %i[ show edit update destroy share ]
 
   def index
-    @file_uploads = current_user.file_uploads
+    @file_uploads = current_user.file_uploads.order(created_at: :desc)
   end
 
   def show
