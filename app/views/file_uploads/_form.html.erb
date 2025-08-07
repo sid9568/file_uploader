@@ -1,0 +1,41 @@
+
+
+  <%= form_with(model: file_upload, local: true, html: { multipart: true }, class: "space-y-6") do |form| %>
+    
+    <% if file_upload.errors.any? %>
+      <div class="bg-red-100 text-red-700 border border-red-300 rounded p-4">
+        <h3 class="text-lg font-semibold mb-2">
+          <%= pluralize(file_upload.errors.count, "error") %> prohibited this file from being saved:
+        </h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <% file_upload.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :title, class: "block text-lg font-medium text-gray-700" %>
+      <%= form.text_field :title, required: true, 
+            class: "w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :description, class: "block text-lg font-medium text-gray-700" %>
+      <%= form.text_area :description, rows: 4,
+            class: "w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :file_type, class: "block text-lg font-medium text-gray-700" %>
+      <%= form.file_field :file_type, required: true, 
+            class: "w-full mt-1 block text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" %>
+    </div>
+
+    <div>
+      <%= form.submit "Upload", 
+            class: "w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200" %>
+    </div>
+
+  <% end %>

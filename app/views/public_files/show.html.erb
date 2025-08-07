@@ -1,0 +1,8 @@
+<h1><%= @file_upload.title %></h1>
+<p><%= @file_upload.description %></p>
+
+<% if @file_upload.file.attached? %>
+  <%= link_to "Download File", url_for(@file_upload.file), target: "_blank", rel: "noopener" %>
+<% else %>
+  <p>No file attached.</p>
+<% end %>

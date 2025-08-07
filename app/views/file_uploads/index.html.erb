@@ -1,0 +1,60 @@
+    
+<div class="container relative overflow-x-auto shadow-md sm:rounded-lg m-auto mt-10">
+
+    <div class="flex justify-end mb-4">
+    	<a href="<%=new_file_upload_path%>">
+    <h2 class="rounded-lg py-2 px-2 bg-blue-600 text-white font-semibold cursor-pointer">Add File Upload<h2>
+    	</a>
+     </div>
+
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Id
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Title
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Description
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    File type
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @file_uploads.each do |file| %>
+            <tr class="border-b dark:border-gray-700 border-gray-200">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <%= file.id %>
+              </th>
+              <td class="px-6 py-4">
+                <%= file.title %>
+              </td>
+              <td class="px-6 py-4">
+                <%= file.description %>
+              </td>
+              <td class="px-6 py-4">
+               <%= file.file_type %>
+
+              </td>
+              <td class="px-6 py-4 flex gap-2">
+                <% if file.file_type %>
+                  <%= link_to "Share", share_file_upload_path(file), method: :get, class: "text-blue-600 hover:underline", target: "_blank" %>
+                <% end %>
+
+               <%= button_to "Delete", file_upload_path(file), method: :delete,
+                data: { turbo_confirm: "Are you sure?" },
+               class: "text-red-600 hover:underline cursor-pointer   " %>
+              </td>
+            </tr>
+          <% end %>
+       </tbody>
+
+    </table>
+</div>
